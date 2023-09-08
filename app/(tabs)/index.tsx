@@ -5,9 +5,12 @@ import { Text, View } from "../../components/Themed";
 import { RefreshControl, ScrollView } from "react-native-gesture-handler";
 import LottieView from "lottie-react-native";
 import { useRef } from "react";
+import { useThreads } from "../../context/theard-context";
+import ThreadsItem from "../../components/ThreadsItem";
 
 export default function TabOneScreen() {
   const animationRef = useRef<LottieView>(null);
+  const thread = useThreads();
   return (
     <SafeAreaView>
       <ScrollView
@@ -32,6 +35,9 @@ export default function TabOneScreen() {
           autoPlay
           style={{ width: 90, height: 90, alignSelf: "center" }}
         />
+        {thread.map((thread) => (
+          <ThreadsItem key={thread.id} {...thread} />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
